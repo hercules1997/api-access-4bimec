@@ -3,6 +3,7 @@ import User from "../models/User"
 import RegisterVisitsSchema from "../schemas/RegisterVisitsSchema"
 import VisitsStatusSchema from "../schemas/VisitsStatusSchema"
 import Visits from "../models/Visits"
+import { ipMachine } from "../../server"
 // * CONTOLLER PARA AS REQUISIÇÕES, INFORMAÇÕES DAS ROTAS DE REGISTRO DE VISITAS */
 
 class RegisterVisitsController {
@@ -36,16 +37,7 @@ class RegisterVisitsController {
       // Busca da pessoa resgistrada pelo id
       const { id: visitId } = request.params
       const visit = await Visits.findByPk(visitId)
-      // const { visitPeople: { id } } = await VisitsStatusSchema.findOne()
-
-      // if (visit.dataValues.id === id  ) {
-      //   return response
-      //     .status(400)
-      //     .json({
-      //       message:
-      //         "Não é possivel registrar essa visita, pois existe uma já em andamento",
-      //     })
-      // }
+ 
 
       const visitsCreate = {
         visitPeople: {
@@ -53,7 +45,7 @@ class RegisterVisitsController {
           name: visit.dataValues.name,
           email: visit.dataValues.email,
           rg: visit.dataValues.rg,
-          path: `http://localhost:3008/visits-file/${visit.dataValues.path}`,
+          path: `http://${ipMachine}:3008/visits-file/${visit.dataValues.path}`,
         },
         visitLocal: request.body.visitLocal,
         reason: request.body.reason,
@@ -104,11 +96,7 @@ class RegisterVisitsController {
         error: err.errors,
       })
     }
-    // const { admin: isAdmin } = await User.findByPk(request.userId)
 
-    // if (!isAdmin) {
-    //   return response.status(401).json({ message: "Não autorizado" })
-    // }
     const { id } = request.params
 
     const verifyId = RegisterVisitsSchema.findById(id)

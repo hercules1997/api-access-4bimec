@@ -34,13 +34,7 @@ class VisitsController {
         })
       }
 
-      const { admin: isAdmin } = await User.findByPk(request.userId)
 
-      if (!isAdmin) {
-        return response.status(401).json({
-          message: "Não autorizado",
-        })
-      }
 
       const { filename: path } = request?.file
     
@@ -99,6 +93,14 @@ class VisitsController {
   async delete(req, resp) {
     try {
 
+   const { admin: isAdmin } = await User.findByPk(request.userId)
+
+   if (!isAdmin) {
+     return response.status(401).json({
+       message: "Não autorizado",
+     })
+   }
+
       const { id } = req.params
       const peopleId = await Visits.findByPk(id)
 
@@ -135,13 +137,7 @@ class VisitsController {
           error: err.errors,
         })
       }
- const { admin: isAdmin } = await User.findByPk(req.userId)
 
- if (!isAdmin) {
-   return resp.status(401).json({
-     message: "Não autorizado",
-   })
- }
 
       const { id } = req.params
       const visit = await Visits.findByPk(id)

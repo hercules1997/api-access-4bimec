@@ -29,11 +29,7 @@ class StatusController {
         error: err.errors,
       })
     }
-    // const { admin: isAdmin } = await User.findByPk(request.userId)
 
-    // if (!isAdmin) {
-    //   return response.status(401).json({ message: "Não autorizado" })
-    // }
 
     const { id } = request.params
     const verifyId = VisitsStatusSchema.findById(id)
