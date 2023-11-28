@@ -10,18 +10,18 @@ class VisitsController {
   async store(request, response) {
     try {
       const schema = Yup.object().shape({
-        name: Yup.string().required(),
-        rg: Yup.string().required(),
-        cpf: Yup.string().required(),
-        phone: Yup.string().required(),
-        email: Yup.string().email().required(),
-        birth: Yup.string().required(),
-        gener: Yup.string().required(),
-        address: Yup.string().required(),
-        numberhouse: Yup.string().required(),
-        zipcode: Yup.string().required(),
-        namemother: Yup.string().required(),
-        namefather: Yup.string().required(),
+        name: Yup.string(),
+        rg: Yup.string(),
+        cpf: Yup.string(),
+        phone: Yup.string(),
+        email: Yup.string().email(),
+        birth: Yup.string(),
+        gener: Yup.string(),
+        address: Yup.string(),
+        numberhouse: Yup.string(),
+        zipcode: Yup.string(),
+        namemother: Yup.string(),
+        namefather: Yup.string(),
       })
 
       try {
@@ -98,31 +98,10 @@ class VisitsController {
 
   async delete(req, resp) {
     try {
-const deletePpeople = sequelize.define("visits", {
-  name: Sequelize.STRING,
-  rg: Sequelize.STRING,
-  cpf: Sequelize.STRING,
-  phone: Sequelize.STRING,
-  email: Sequelize.STRING,
-  birth: Sequelize.STRING,
-  address: Sequelize.STRING,
-  numberhouse: Sequelize.STRING,
-  zipcode: Sequelize.STRING,
-  namemother: Sequelize.STRING,
-  namefather: Sequelize.STRING,
-  path: Sequelize.STRING,
-  url: {
-    type: Sequelize.VIRTUAL,
-    get() {
-      return `http://localhost:3007/visits-file/${this.path}`
-    },
-  },
-})
 
       const { id } = req.params
       const peopleId = await Visits.findByPk(id)
 
-      // deletePpeople.destroy({ where: { id: peopleId.dataValues.id } })
       peopleId.destroy({ id })
       return resp.status(200).json({ message: "Pessoa deletada com sucesso!" })
     } catch (error) {
@@ -133,18 +112,18 @@ const deletePpeople = sequelize.define("visits", {
   async update(req, resp) {
     try {
       const schema = Yup.object().shape({
-        name: Yup.string().required(),
-        rg: Yup.string().required(),
-        cpf: Yup.string().required(),
-        phone: Yup.string().required(),
-        email: Yup.email().required(),
-        birth: Yup.string().required(),
-        gener: Yup.string().required(),
-        address: Yup.string().required(),
-        numberhouse: Yup.string().required(),
-        zipcode: Yup.string().required(),
-        namemother: Yup.string().required(),
-        namefather: Yup.string().required(),
+        name: Yup.string(),
+        rg: Yup.string(),
+        cpf: Yup.string(),
+        phone: Yup.string(),
+        email: Yup.string().email(),
+        birth: Yup.string(),
+        gener: Yup.string(),
+        address: Yup.string(),
+        numberhouse: Yup.string(),
+        zipcode: Yup.string(),
+        namemother: Yup.string(),
+        namefather: Yup.string(),
       })
 
       try {
@@ -193,7 +172,7 @@ const deletePpeople = sequelize.define("visits", {
         namefather,
       } = req.body
 
-      await Visitor.update(
+      await Visits.update(
         {
           name,
           rg,
@@ -217,7 +196,7 @@ const deletePpeople = sequelize.define("visits", {
       )
 
       return resp.status(200).json({
-        message: "Alterado com sucesso!",
+        message: "Pessoa editada com sucesso!",
       })
     } catch (err) {
       console.log(err)

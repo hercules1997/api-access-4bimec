@@ -20,6 +20,8 @@ ROTA PARA CRIAÇÃO DE USUÁRIOS
 */
 routes.get("/users", UserController.index)
 routes.post("/users", UserController.store)
+routes.put("/users/:id", UserController.update)
+routes.delete("/users/:id", UserController.delete)
 
 /*
  ROTA PARA REALIZAR O LOGIN
@@ -53,10 +55,10 @@ ROTAS DAS CATEGORIAS
 /* 
 ROTAS DOS REGISTROS DAS VISITAS
 */
-routes.post("/visits-registers/:id", RegisterVisitsController.store)
-routes.put("/visits-registers/:id", RegisterVisitsController.update)
 routes.get("/visits-registers", RegisterVisitsController.index)
 routes.delete("/visits-registers/:id", RegisterVisitsController.delete)
+routes.post("/visits-registers/:id", RegisterVisitsController.store)
+routes.put("/visits-registers/:id", RegisterVisitsController.update)
 
 routes.get("/visits-status", StatusController.index)
 routes.put("/visits-status/:id", StatusController.update)

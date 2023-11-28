@@ -38,8 +38,6 @@ class RegisterVisitsController {
       const visit = await Visits.findByPk(visitId)
       // const { visitPeople: { id } } = await VisitsStatusSchema.findOne()
 
-
-
       // if (visit.dataValues.id === id  ) {
       //   return response
       //     .status(400)
@@ -53,8 +51,9 @@ class RegisterVisitsController {
         visitPeople: {
           id: visit.dataValues.id,
           name: visit.dataValues.name,
+          email: visit.dataValues.email,
           rg: visit.dataValues.rg,
-          path: `http://localhost:3007/visits-file/${visit.dataValues.path}`,
+          path: `http://localhost:3008/visits-file/${visit.dataValues.path}`,
         },
         visitLocal: request.body.visitLocal,
         reason: request.body.reason,
@@ -105,11 +104,11 @@ class RegisterVisitsController {
         error: err.errors,
       })
     }
-    const { admin: isAdmin } = await User.findByPk(request.userId)
+    // const { admin: isAdmin } = await User.findByPk(request.userId)
 
-    if (!isAdmin) {
-      return response.status(401).json({ message: "Não autorizado" })
-    }
+    // if (!isAdmin) {
+    //   return response.status(401).json({ message: "Não autorizado" })
+    // }
     const { id } = request.params
 
     const verifyId = RegisterVisitsSchema.findById(id)
@@ -143,10 +142,16 @@ class RegisterVisitsController {
       status,
     })
   }
+
   // Rota para deletar
   async delete(request, response) {
     try {
       // Recebe o id como parmetro da requisição
+      const { admin: isAdmin } = await User.findByPk(request.userId)
+
+      if (!isAdmin) {
+        return response.status(401).json({ message: "Não autorizado" })
+      }
       const { id } = request.params
       // Encontra o id e deleta
       await RegisterVisitsSchema.findOneAndDelete({ _id: id })
