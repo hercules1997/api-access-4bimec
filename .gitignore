@@ -1,2 +1,6 @@
 node_modules
 
+# chaves
+chave-privada.pem
+csr.pem
+certificado.pem

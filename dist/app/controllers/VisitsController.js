@@ -1,11 +1,11 @@
-import * as Yup from "yup"
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } } function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; } function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }var _yup = require('yup'); var Yup = _interopRequireWildcard(_yup);
 // import Category from "../models/Category"
-import User from "../models/User"
-import database from "../../database"
-import { Sequelize } from "sequelize"
-import Visits from "../models/Visits"
+var _User = require('../models/User'); var _User2 = _interopRequireDefault(_User);
+var _database = require('../../database'); var _database2 = _interopRequireDefault(_database);
+var _sequelize = require('sequelize');
+var _Visits = require('../models/Visits'); var _Visits2 = _interopRequireDefault(_Visits);
 
-const sequelize = database.connection
+const sequelize = _database2.default.connection
 class VisitsController {
   async store(request, response) {
     try {
@@ -36,7 +36,7 @@ class VisitsController {
 
 
 
-      const { filename: path } = request?.file
+      const { filename: path } = _optionalChain([request, 'optionalAccess', _ => _.file])
     
       const {
         name,
@@ -53,7 +53,7 @@ class VisitsController {
         namefather,
       } = request.body
 
-      const people = await Visits.create({
+      const people = await _Visits2.default.create({
         name,
         rg,
         cpf,
@@ -82,7 +82,7 @@ class VisitsController {
 
   async index(req, resp) {
     try {
-      const allPeopleRegisters = await Visits.findAll()
+      const allPeopleRegisters = await _Visits2.default.findAll()
 
       return resp.json(allPeopleRegisters)
     } catch (error) {
@@ -102,7 +102,7 @@ class VisitsController {
  //  }
 
       const { id } = req.params
-      const peopleId = await Visits.findByPk(id)
+      const peopleId = await _Visits2.default.findByPk(id)
 console.log(id)
       peopleId.destroy({ id })
       return resp.status(200).json({ message: "Pessoa deletada com sucesso!" })
@@ -140,7 +140,7 @@ console.log(id)
 
 
       const { id } = req.params
-      const visit = await Visits.findByPk(id)
+      const visit = await _Visits2.default.findByPk(id)
 
       if (!visit) {
         return resp.status(401).json({
@@ -168,7 +168,7 @@ console.log(id)
         namefather,
       } = req.body
 
-      await Visits.update(
+      await _Visits2.default.update(
         {
           name,
           rg,
@@ -200,4 +200,4 @@ console.log(id)
   }
 }
 
-export default new VisitsController()
+exports. default = new VisitsController()

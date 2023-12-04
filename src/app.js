@@ -1,11 +1,14 @@
 import express from "express"
 import routes from "./routes"
+
 import {
   resolve
 } from "path"
 import cors from 'cors'
 
 import "./database"
+
+
 
 class App {
   constructor() {
@@ -23,10 +26,6 @@ class App {
       "/visits-file",
       express.static(resolve(__dirname, "..", "uploads"))
     )
-    // this.app.use(
-    //   "/category-file",
-    //   express.static(resolve(__dirname, "..", "uploads"))
-    // )
   }
 
   routes() {
