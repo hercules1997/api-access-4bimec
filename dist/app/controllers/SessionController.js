@@ -1,7 +1,7 @@
-import * as Yup from "yup"
-import jwt from "jsonwebtoken"
-import User from "../models/User"
-import authConfig from "../../config/auth"
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { newObj[key] = obj[key]; } } } newObj.default = obj; return newObj; } } function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _yup = require('yup'); var Yup = _interopRequireWildcard(_yup);
+var _jsonwebtoken = require('jsonwebtoken'); var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
+var _User = require('../models/User'); var _User2 = _interopRequireDefault(_User);
+var _auth = require('../../config/auth'); var _auth2 = _interopRequireDefault(_auth);
 
 class SessionController {
   async store(request, response) {
@@ -21,7 +21,7 @@ class SessionController {
       if (!(await schema.isValid(request.body))) useEmailOrPasswordIncorret()
 
       const { usuario, password } = request.body
-      const user = await User.findOne({
+      const user = await _User2.default.findOne({
         where: {
           usuario,
         },
@@ -35,16 +35,14 @@ class SessionController {
         id: user.id,
         usuario: user.usuario,
         admin: user.admin,
-        s2: user.s2,
-        token: jwt.sign(
+        token: _jsonwebtoken2.default.sign(
           {
             id: user.id,
             usuario: user.usuario,
-            s2: user.s2,
           },
-          authConfig.secret,
+          _auth2.default.secret,
           {
-            expiresIn: authConfig.expiresIn,
+            expiresIn: _auth2.default.expiresIn,
           }
         ),
       })
@@ -55,4 +53,4 @@ class SessionController {
     }
   }
 }
-export default new SessionController()
+exports. default = new SessionController()

@@ -1,18 +1,18 @@
-import app from "./app"
-import { networkInterfaces }  from 'os'
-import http from "http"
-import https from "https"
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _app = require('./app'); var _app2 = _interopRequireDefault(_app);
+var _os = require('os');
+var _http = require('http'); var _http2 = _interopRequireDefault(_http);
+var _https = require('https'); var _https2 = _interopRequireDefault(_https);
 const fs = require('fs');
 const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
 
 
-const interfaces = networkInterfaces();
+const interfaces = _os.networkInterfaces.call(void 0, );
 
 
-app.use(redirectToHTTPS());
+_app2.default.use(redirectToHTTPS());
 
 // Criar servidor HTTP
-const httpServer = http.createServer(app);
+const httpServer = _http2.default.createServer(_app2.default);
 
 // Criar servidor HTTPS
 const options = {
@@ -21,7 +21,7 @@ const options = {
 };
 
 
-const httpsServer = https.createServer(options, app);
+const httpsServer = _https2.default.createServer(options, _app2.default);
 
 const httpPort = process.env.HTTP_PORT || 3007;
 const httpsPort = process.env.HTTPS_PORT || 3008;
@@ -35,7 +35,7 @@ if(ip) {
     console.log('endereço de ip', ip.address)
 }
 
-export const ipMachine = ip.address
+ const ipMachine = ip.address; exports.ipMachine = ipMachine
 const port = process.env.PORT || 3008;
 
 httpServer.listen(httpPort, () => {
