@@ -20,7 +20,7 @@ class Visits extends Model {
         url: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `http://localhost:3008/visits-file/${this.path}`
+            return `https://10.12.112.24:3008/visits-file/${this.path}`
           },
         },
       },

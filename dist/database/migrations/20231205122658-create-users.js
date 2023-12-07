@@ -1,4 +1,4 @@
-"use strict"
+"use strict";"use strict"
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -8,6 +8,12 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
+      },
+
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
 
       usuario: {
