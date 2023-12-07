@@ -36,7 +36,7 @@ class VisitsController {
 
 
 
-      const { filename: path } = request?.file
+      const { filename: path } = request.file
     
       const {
         name,

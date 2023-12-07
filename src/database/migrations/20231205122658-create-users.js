@@ -10,6 +10,12 @@ module.exports = {
         primaryKey: true,
       },
 
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+
       usuario: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -22,6 +28,11 @@ module.exports = {
       },
 
       admin: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+      },
+      s2: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
         allowNull: false,

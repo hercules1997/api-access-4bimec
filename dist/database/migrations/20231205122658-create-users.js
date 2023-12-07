@@ -10,6 +10,12 @@ module.exports = {
         primaryKey: true,
       },
 
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+
       usuario: {
         type: Sequelize.STRING,
         allowNull: false,

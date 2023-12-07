@@ -6,6 +6,7 @@ class User extends _sequelize.Model {
   static init(sequelize) {
     super.init(
       {
+        name: _sequelize2.default.STRING,
         usuario: _sequelize2.default.STRING,
         password: _sequelize2.default.VIRTUAL,
         password_hash: _sequelize2.default.STRING,
