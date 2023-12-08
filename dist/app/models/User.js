@@ -11,6 +11,7 @@ class User extends _sequelize.Model {
         password: _sequelize2.default.VIRTUAL,
         password_hash: _sequelize2.default.STRING,
         admin: _sequelize2.default.BOOLEAN,
+        s2: _sequelize2.default.BOOLEAN,
       },
       {
         sequelize,

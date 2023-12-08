@@ -7,10 +7,11 @@ class UserController {
   async store(request, response) {
     try {
       const schema = Yup.object().shape({
-        usuario: Yup.string().required(),
         name: Yup.string().required(),
+        usuario: Yup.string().required(),
         password: Yup.string().required(),
         admin: Yup.boolean().required(),
+        s2: Yup.boolean(),
       })
 
       if (!(await schema.isValid(request.body))) {
@@ -30,7 +31,7 @@ class UserController {
       return response.status(405).json({ message: "Usuário não existe" })
     }
 
-    const { name, usuario, password, admin } = request.body
+    const { name, s2, usuario, password, admin } = request.body
 
     const userExist = await _User2.default.findOne({
       where: {
@@ -50,6 +51,7 @@ class UserController {
       usuario,
       password,
       admin,
+      s2
     })
 
     return response.status(201).json({
@@ -58,6 +60,7 @@ class UserController {
       usuario,
       password,
       admin,
+      s2
     })
   }
 
@@ -73,7 +76,7 @@ class UserController {
 
   async update(req, res) {
     try {
-      const { name, usuario, admin, password } = req.body
+      const { name, s2, usuario, admin, password } = req.body
 
       const user = await _User2.default.findByPk(req.params.id)
 
@@ -82,10 +85,13 @@ class UserController {
       }
 
       // Atualiza os campos não relacionados à senha
-      user.name = usuario
+      user.name = name
+  
       user.usuario = usuario
 
       user.admin = admin
+      user.s2 = s2
+
 
       // Se a senha estiver presente na requisição, atualiza o hash da senha
       if (password) {

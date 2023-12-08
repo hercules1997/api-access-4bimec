@@ -35,10 +35,12 @@ class SessionController {
         id: user.id,
         usuario: user.usuario,
         admin: user.admin,
+        s2: user.s2,
         token: _jsonwebtoken2.default.sign(
           {
             id: user.id,
             usuario: user.usuario,
+            s2: user.s2,
           },
           _auth2.default.secret,
           {
