@@ -7,8 +7,8 @@ class UserController {
   async store(request, response) {
     try {
       const schema = Yup.object().shape({
-        usuario: Yup.string().required(),
         name: Yup.string().required(),
+        usuario: Yup.string().required(),
         password: Yup.string().required(),
         admin: Yup.boolean().required(),
         s2: Yup.boolean(),
@@ -85,7 +85,8 @@ class UserController {
       }
 
       // Atualiza os campos não relacionados à senha
-      user.name = usuario
+      user.name = name
+  
       user.usuario = usuario
 
       user.admin = admin
