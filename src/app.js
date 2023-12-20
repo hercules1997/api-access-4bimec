@@ -8,8 +8,6 @@ import cors from 'cors'
 
 import "./database"
 
-
-
 class App {
   constructor() {
     this.app = express()
@@ -17,7 +15,6 @@ class App {
 
     this.middlewares()
     this.routes()
-
   }
 
   middlewares() {
