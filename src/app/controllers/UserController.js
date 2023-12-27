@@ -84,7 +84,7 @@ class UserController {
         return res.status(400).json({ error: "Usuário não encontrado." })
       }
 
-      // Atualiza os campos não relacionados à senha
+      // Atualiza os campos 
       user.name = name
   
       user.usuario = usuario
@@ -108,13 +108,13 @@ class UserController {
 
   async delete(req, resp) {
     try {
-      const { id } = req.params
+      const {id}  = req.params
       const idUser = await User.findByPk(id)
 
       idUser.destroy({ id })
       return resp.status(200).json({ message: "Pessoa deletada com sucesso!" })
     } catch (error) {
-      console.log({ message: "Pessoa deletada com sucesso!" }, error)
+      console.log({ message: "Erro ao  deletar pessoa!" }, error)
     }
   }
 }
