@@ -11,7 +11,10 @@ require('./database');
 class App {
   constructor() {
     this.app = _express2.default.call(void 0, )
-    this.app.use(_cors2.default.call(void 0, ))
+    this.app.use(_cors2.default.call(void 0, {
+      origin: 'https://10.12.112.24'
+    }))
+ 
 
     this.middlewares()
     this.routes()
